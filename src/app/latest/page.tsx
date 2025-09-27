@@ -1,11 +1,12 @@
 'use client'
 import React from 'react'
 import {ActionCard} from '@/components/main-card'
-import { DiAndroid } from "react-icons/di";
+import { DiAndroid,DiChrome  } from "react-icons/di";
 
 const cards = [
   { title: "Android", description: "Google's OS", icon: DiAndroid },
-  { title: "Another Card", description: "No icon here" },
+  { title: "Chrome", description: "Google Chrome",icon:DiChrome },
+  { title: "test",icon: DiAndroid }
 ];
 
 export default function CardsPage() {
