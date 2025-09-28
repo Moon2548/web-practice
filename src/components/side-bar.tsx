@@ -6,7 +6,7 @@ import { GoClock, GoBell } from "react-icons/go";
 export default function Sidebar() {
 
     return (
-        <div className="bg-red-200" >
+        <div className="bg-red-200 h-full" >
             <Link href="/home"><MainButton icon={<FaUser />} label="สำหรับคุณ" classname="w-full justify-start" /></Link>
             <Link href="/latest"><MainButton icon={<GoClock />} label="ล่าสุด" classname="w-full justify-start" /></Link>
             <Link href="/notifications"><MainButton icon={<FaUser />} label="การแจ้งเตือน" classname="w-full justify-start" /></Link>
