@@ -32,7 +32,15 @@ import { FaUser } from "react-icons/fa";
 import { AiOutlineTeam } from "react-icons/ai";
 import Link from "next/link";
 
-export default function Navbar() {
+type NavbarProps = {
+    setShowhelp: (a: boolean) => void;
+    setOpenSidebar: (a: boolean) => void;
+    showhelp: boolean;
+    opensidebar: boolean;
+};
+
+
+export default function Navbar({ setShowhelp, setOpenSidebar, showhelp, opensidebar }: NavbarProps) {
     const [step, setStep] = useState<"create" | "teamForm">("create");
 
     return (
@@ -63,7 +71,7 @@ export default function Navbar() {
                 <div className="flex w-1/2 gap-2">
                     <Input className="border-purple-500" placeholder="ค้นหา"></Input>
                     <Popover>
-                        <PopoverTrigger>
+                        <PopoverTrigger asChild>
                             <MainButton icon={<GoPlus />} label="สร้าง" onClick={() => setStep("create")} classname="bg-purple-600 text-white hover:text-white hover:bg-purple-400"></MainButton>
                         </PopoverTrigger>
                         <PopoverContent align="start" className="w-60">
@@ -83,7 +91,7 @@ export default function Navbar() {
                 </div>
                 <div className="flex gap-2">
                     <Popover>
-                        <PopoverTrigger>
+                        <PopoverTrigger asChild>
                             <MainButton icon={<GoBell />}></MainButton>
                         </PopoverTrigger>
                         <PopoverContent align="end">
@@ -93,7 +101,7 @@ export default function Navbar() {
                             </div>
                         </PopoverContent>
                     </Popover>
-                    <MainButton icon={<IoMdHelpCircleOutline />}></MainButton>
+                    <MainButton icon={<IoMdHelpCircleOutline />} onClick={() => setShowhelp(!showhelp)}></MainButton>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <MainButton icon={<GoGear />}></MainButton>
@@ -121,13 +129,13 @@ export default function Navbar() {
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <DropdownMenuTrigger asChild>
                             <MainButton icon={<FaUser />}></MainButton>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-100" align="end">
                             <DropdownMenuGroup>
                                 <div className="flex">
-                                    <FaUser className="mr-4 text-[50px]" />
+                                    <FaUser className="mr-4 mt-auto mb-auto text-[50px]" />
                                     <div>
                                         <h1 className="text-[24px]">Name_test</h1>
                                         <h1>gmail</h1>
