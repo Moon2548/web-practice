@@ -1,10 +1,16 @@
 "use client";
 
+import {
+    ResizableHandle,
+    ResizablePanel,
+    ResizablePanelGroup,
+} from "@/components/ui/resizable"
 import { useState } from "react";
 import { MainButton } from "@/components/main-button";
 import { FaBeer } from "react-icons/fa";
 import Navbar from "@/components/navbar";
 import Helpbar from "@/components/help-bar";
+import Sidebar from "@/components/side-bar";
 import Link from "next/link";
 
 export default function Home() {
@@ -15,6 +21,7 @@ export default function Home() {
         <div>
             <Navbar setShowhelp={setShowhelp} setOpenSidebar={setOpenSidebar} showhelp={showhelp} opensidebar={opensidebar} />
             <div className="flex h-screen">
+                {opensidebar && (<Sidebar />)}
                 <div>
                     <MainButton icon={<FaBeer />} label="Click Me" subLabel="This is a sub-label---------------------------" />
                     <MainButton icon={<FaBeer />} label="Click Me" />

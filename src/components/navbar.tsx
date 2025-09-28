@@ -47,7 +47,7 @@ export default function Navbar({ setShowhelp, setOpenSidebar, showhelp, openside
         <nav className="w-full bg-pink-200 border-b-purple-400 border-b-2 p-2">
             <div className="flex items-center justify-between">
                 <div className="flex gap-2">
-                    <MainButton icon={<GoSidebarCollapse />}></MainButton>
+                    <MainButton icon={opensidebar ? <GoSidebarExpand /> : <GoSidebarCollapse />} onClick={() => setOpenSidebar(!opensidebar)}></MainButton>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <MainButton icon={<DiNetbeans />} ></MainButton>
