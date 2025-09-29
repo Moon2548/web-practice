@@ -17,7 +17,7 @@ type HelpbarProps = {
 export default function Helpbar({ setShowhelp }: HelpbarProps) {
 
     return (
-        <div className="w-[440px] max-w-[440px] min-w-[400px] h-full ml-auto border-2 border-black">
+        <div className="w-[440px] max-w-[440px] min-w-[400px] h-full ml-auto border-l-1 border-l-purple-400">
             <div className="flex items-center justify-between h-[80px] bg-gray-200">
                 <div></div>
                 <h1 className="my-auto text-[20px] font-bold">Help</h1>

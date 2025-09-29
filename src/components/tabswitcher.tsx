@@ -21,11 +21,10 @@ export function MenuSwitcher({ items, selected, onSelect, variant = "tabs" }: Me
         {items.map((item) => (
           <button
             key={item.key}
-            className={`pb-1 border-b-2 ${
-              selected === item.key
+            className={`pb-1 border-b-2 ${selected === item.key
                 ? "border-pink-500 text-pink-600 font-medium"
                 : "hover:bg-gray-50 hover:text-purple -700 text-gray-700"
-            }`}
+              }`}
             onClick={() => onSelect(item.key)}
           >
             {item.icon && <span className="mr-2">{item.icon}</span>}
@@ -43,11 +42,10 @@ export function MenuSwitcher({ items, selected, onSelect, variant = "tabs" }: Me
         {items.map((item) => (
           <button
             key={item.key}
-            className={`flex items-center w-full px-3 py-2 rounded text-left ${
-              selected === item.key
+            className={`flex items-center w-full px-3 py-2 rounded text-left ${selected === item.key
                 ? "bg-purple-50 text-purple-600 font-medium border-l-4 border-purple-500"
                 : "hover:bg-gray-50 hover:text-pink-700 text-gray-700"
-            }`}
+              }`}
             onClick={() => onSelect(item.key)}
           >
             {item.icon && <span className="mr-2">{item.icon}</span>}
