@@ -44,14 +44,18 @@ export default function Base({ children }: HomeProps) {
                             <Sidebar />
                         </ResizablePanel>
                         <ResizableHandle />
-                        <ResizablePanel className="flex h-screen w-full min-w-[800px]">
-                            {children}
+                        <ResizablePanel className="flex h-screen w-full box-border">
+                            <div className="w-full h-full">
+                                {children}
+                            </div>
                             {showhelp && <Helpbar setShowhelp={setShowhelp} />}
                         </ResizablePanel>
                     </ResizablePanelGroup>
                 ) : (
-                    <div className="flex h-screen w-full min-w-[800px]">
-                        {children}
+                    <div className="flex h-screen w-full box-border">
+                        <div className="w-full h-full">
+                            {children}
+                        </div>
                         {showhelp && <Helpbar setShowhelp={setShowhelp} />}
                     </div>
                 )}
