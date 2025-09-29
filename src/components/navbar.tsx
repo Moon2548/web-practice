@@ -31,6 +31,12 @@ import { IoMdHelpCircleOutline } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { AiOutlineTeam } from "react-icons/ai";
 import Link from "next/link";
+import { MenuSwitcher } from '@/components/tabswitcher'
+
+const tabItems = [
+    { key: "direct", label: "โดยตรง" },
+    { key: "seen", label: "เฝ้าดู" }
+];
 
 type NavbarProps = {
     setShowhelp: (a: boolean) => void;
@@ -42,6 +48,7 @@ type NavbarProps = {
 
 export default function Navbar({ setShowhelp, setOpenSidebar, showhelp, opensidebar }: NavbarProps) {
     const [step, setStep] = useState<"create" | "teamForm">("create");
+    const [tab, setTab] = useState("direct");
 
     return (
         <nav className="w-full bg-pink-200 border-b-purple-400 border-b-2 p-2">
@@ -94,11 +101,26 @@ export default function Navbar({ setShowhelp, setOpenSidebar, showhelp, openside
                         <PopoverTrigger asChild>
                             <MainButton icon={<GoBell />}></MainButton>
                         </PopoverTrigger>
-                        <PopoverContent align="end">
-                            <div>
-                                <h1>การแจ้งเตือน</h1>
-                                <MainButton label="test"></MainButton>
+                        <PopoverContent align="end" className="w-[540px] min-h-[700px]">
+                            <div className="flex justify-start items-center text-[20px]">
+                                การแจ้งเตือน
                             </div>
+                            <MenuSwitcher
+                                items={tabItems}
+                                selected={tab}
+                                onSelect={setTab}
+                                variant="tabs"
+                            />
+                            {tab === "direct" && (
+                                <div className="text-center">
+                                    ไม่มีข้อมูล
+                                </div>
+                            )}
+                            {tab === "seen" && (
+                                <div className="text-center">
+                                    คุณไม่มีรายการการแจ้งเตือนจาก 30 วันที่ผ่านมา
+                                </div>
+                            )}
                         </PopoverContent>
                     </Popover>
                     <MainButton icon={<IoMdHelpCircleOutline />} onClick={() => setShowhelp(!showhelp)}></MainButton>
