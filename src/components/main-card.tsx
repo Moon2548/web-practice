@@ -11,21 +11,21 @@ export type ActionCardProps = {
 export function ActionCard({ title, description, icons }: ActionCardProps) {
   const cardPadding = description ? 'py-4 px-6' : 'py-2 px-4';
   const headerGap = description ? 'gap-3' : 'gap-1';
+  const minHeight = description ? 'min-h-[85px]' : 'min-h-[45 px]'; 
   
   return (
-    <div className="mx-auto max-w-5xl p-6 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start">
-      <Card
-        onClick={() => alert(`Card clicked: ${title}`)}
-        className={`cursor-pointer hover:shadow-lg transition ${cardPadding}`}
-      >
-        <CardHeader className={`flex flex-row items-center ${headerGap} text-left`}>
-          {icons && <div className="text-primary">{icons}</div>}
-          <div className="flex flex-col">
-            <CardTitle className="text-lg">{title}</CardTitle>
-            {description && <CardDescription>{description}</CardDescription>}
-          </div>
-        </CardHeader>
-      </Card>
-    </div>
+    <Card
+      onClick={() => alert(`Card clicked: ${title}`)}
+      className={`cursor-pointer hover:shadow-lg transition w-full min-w-[220px] ${minHeight} ${cardPadding}`}
+      
+    >
+      <CardHeader className={`flex flex-row items-center ${headerGap} text-left`}>
+        {icons && <div className="text-primary">{icons}</div>}
+        <div className="flex flex-col">
+          <CardTitle className="text-lg">{title}</CardTitle>
+          {description && <CardDescription>{description}</CardDescription>}
+        </div>
+      </CardHeader>
+    </Card>
   )
 }

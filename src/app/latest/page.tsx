@@ -17,9 +17,11 @@ const tabItems = [
 
 export default function LatestPage() {
   const [tab, setTab] = useState("done");
+  const gridGap = "gap-4"; 
+  const containerPadding = "p-8"; 
 
   return (
-    <div className="mx-auto max-w-5xl p-6 w-full">
+    <div className={`mx-auto max-w-5xl ${containerPadding} w-full`}> 
       <h2 className="text-2xl font-bold mb-4">ล่าสุด</h2>
       <MenuSwitcher
         items={tabItems}
@@ -28,7 +30,7 @@ export default function LatestPage() {
         variant="tabs"
       />
       {tab === "done" && (
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={`grid ${gridGap} grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start`}> {/* ← ใช้ตัวแปร */}
           {cards.map((c) => (
             <ActionCard
               key={c.title}

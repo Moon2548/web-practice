@@ -24,7 +24,7 @@ export function MenuSwitcher({ items, selected, onSelect, variant = "tabs" }: Me
             className={`pb-1 border-b-2 ${
               selected === item.key
                 ? "border-pink-500 text-pink-600 font-medium"
-                : "hover:bg-gray-50 hover:text-purple -700 text-gray-700"
+                : "hover:border-purple-500 hover:bg-gray-50 hover:text-purple-700 text-gray-700"
             }`}
             onClick={() => onSelect(item.key)}
           >
