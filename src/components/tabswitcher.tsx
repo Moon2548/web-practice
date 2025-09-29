@@ -34,7 +34,6 @@ export function MenuSwitcher({ items, selected, onSelect, variant = "tabs" }: Me
       </div>
     );
   }
-
   // แนวตั้ง
   if (variant === "sidebar") {
     return (

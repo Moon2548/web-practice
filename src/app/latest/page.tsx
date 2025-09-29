@@ -17,7 +17,7 @@ const tabItems = [
 
 export default function LatestPage() {
   const [tab, setTab] = useState("done");
-  const gridGap = "gap-4"; 
+  const gridGap = "gap-0"; 
   const containerPadding = "p-8"; 
 
   return (
@@ -30,7 +30,7 @@ export default function LatestPage() {
         variant="tabs"
       />
       {tab === "done" && (
-        <div className={`grid ${gridGap} grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start`}> {/* ← ใช้ตัวแปร */}
+        <div className={`grid ${gridGap} grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 items-start`}> 
           {cards.map((c) => (
             <ActionCard
               key={c.title}
