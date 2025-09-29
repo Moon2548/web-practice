@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import { NotificationSidebar } from '@/components/sideswitcher'
 import { FiMail, FiFlag, FiEye, FiTag } from "react-icons/fi";
 
+const pageTitle = "ระบบการแจ้งเตือน";
+const appSectionName = "เครื่องมือ";
+
 const notificationMenus = [
   { key: "all", label: "ทั้งหมด", icon: <FiMail /> },
   { key: "direct", label: "โดยตรง", icon: <FiFlag /> },
@@ -131,7 +134,8 @@ export default function NotificationsPage() {
       <NotificationSidebar
         selected={selected}
         onSelect={setSelected}
-        title="การแจ้งเตือน"
+        title={pageTitle}              
+        appSectionTitle={appSectionName} 
         mainMenus={notificationMenus}
         appMenus={appMenus}
       />

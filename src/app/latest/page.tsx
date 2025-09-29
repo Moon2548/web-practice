@@ -19,7 +19,7 @@ export default function LatestPage() {
   const [tab, setTab] = useState("done");
 
   return (
-    <div className="mx-auto max-w-5xl p-6">
+    <div className="mx-auto max-w-5xl p-6 w-full">
       <h2 className="text-2xl font-bold mb-4">ล่าสุด</h2>
       <MenuSwitcher
         items={tabItems}

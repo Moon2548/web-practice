@@ -23,7 +23,7 @@ export function MenuSwitcher({ items, selected, onSelect, variant = "tabs" }: Me
             key={item.key}
             className={`pb-1 border-b-2 ${
               selected === item.key
-                ? "border-blue-500 text-blue-600 font-medium"
+                ? "border-pink-500 text-pink-600 font-medium"
                 : "border-transparent text-gray-500"
             }`}
             onClick={() => onSelect(item.key)}
@@ -45,7 +45,7 @@ export function MenuSwitcher({ items, selected, onSelect, variant = "tabs" }: Me
             key={item.key}
             className={`flex items-center w-full px-3 py-2 rounded text-left ${
               selected === item.key
-                ? "bg-blue-50 text-blue-600 font-medium border-l-4 border-blue-500"
+                ? "bg-purple-50 text-purple-600 font-medium border-l-4 border-purple-500"
                 : "hover:bg-gray-100 text-gray-700"
             }`}
             onClick={() => onSelect(item.key)}
