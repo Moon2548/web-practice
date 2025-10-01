@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
 import { MainButton } from "./main-button";
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -24,12 +22,15 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { Button } from "./ui/button";
 import { GoSidebarCollapse, GoSidebarExpand, GoBell, GoGear, GoPlus, GoCreditCard, GoSun, GoSignOut } from "react-icons/go";
 import { MdHome } from "react-icons/md";
 import { DiNetbeans } from "react-icons/di";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { AiOutlineTeam } from "react-icons/ai";
+import { X, Settings } from "lucide-react";
 import Link from "next/link";
 import { MenuSwitcher } from '@/components/tabswitcher'
 
@@ -45,10 +46,42 @@ type NavbarProps = {
     opensidebar: boolean;
 };
 
-
 export default function Navbar({ setShowhelp, setOpenSidebar, showhelp, opensidebar }: NavbarProps) {
     const [step, setStep] = useState<"create" | "teamForm">("create");
     const [tab, setTab] = useState("direct");
+    
+    // Team Form State
+    const [teamFormData, setTeamFormData] = useState({
+        teamName: '',
+        teamType: '',
+        inviteEmails: [] as string[]
+    });
+    const [emailInput, setEmailInput] = useState('');
+
+    const addEmail = () => {
+        if (emailInput && !teamFormData.inviteEmails.includes(emailInput)) {
+            setTeamFormData(prev => ({
+                ...prev,
+                inviteEmails: [...prev.inviteEmails, emailInput]
+            }));
+            setEmailInput('');
+        }
+    };
+
+    const removeEmail = (email: string) => {
+        setTeamFormData(prev => ({
+            ...prev,
+            inviteEmails: prev.inviteEmails.filter(e => e !== email)
+        }));
+    };
+
+    const handleTeamSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log("Team created:", teamFormData);
+        // Reset form และกลับไป create menu
+        setTeamFormData({ teamName: '', teamType: '', inviteEmails: [] });
+        setStep("create");
+    };
 
     return (
         <nav className="w-full bg-pink-200 border-b-purple-400 border-b-2 p-2">
@@ -79,18 +112,116 @@ export default function Navbar({ setShowhelp, setOpenSidebar, showhelp, openside
                     <Input className="border-purple-500" placeholder="ค้นหา"></Input>
                     <Popover>
                         <PopoverTrigger asChild>
-                            <MainButton icon={<GoPlus />} label="สร้าง" onClick={() => setStep("create")} classname="bg-purple-600 text-white hover:text-white hover:bg-purple-400"></MainButton>
+                            <MainButton 
+                                icon={<GoPlus />} 
+                                label="สร้าง" 
+                                onClick={() => setStep("create")} 
+                                classname="bg-purple-600 text-white hover:text-white hover:bg-purple-400"
+                            />
                         </PopoverTrigger>
-                        <PopoverContent align="start" className="w-60">
+                        <PopoverContent align="start" className="w-96 max-h-[500px] overflow-y-auto">
                             {step === "create" && (
                                 <div>
-                                    <MainButton icon={<AiOutlineTeam />} label="ทีม" onClick={() => setStep("teamForm")} classname="w-full justify-start" />
+                                    <MainButton 
+                                        icon={<AiOutlineTeam />} 
+                                        label="ทีม" 
+                                        onClick={() => setStep("teamForm")}
+                                        classname="w-full justify-start" 
+                                    />
                                 </div>
                             )}
+                            
                             {step === "teamForm" && (
-                                <div>
-                                    <h1>test form</h1>
-                                    <Input placeholder="name"></Input>
+                                <div className="space-y-4">
+                                    {/* Header */}
+                                    <div className="flex items-center justify-between border-b pb-2">
+                                        <h2 className="text-lg font-semibold">สร้างทีม</h2>
+                                        <Button 
+                                            variant="ghost" 
+                                            size="sm"
+                                            onClick={() => setStep("create")}
+                                        >
+                                            <X className="w-4 h-4" />
+                                        </Button>
+                                    </div>
+
+                                    {/* Form */}
+                                    <form onSubmit={handleTeamSubmit} className="space-y-4">
+                                        {/* Team Name */}
+                                        <div>
+                                            <Label htmlFor="teamName" className="text-sm font-medium">
+                                                ชื่อทีม *
+                                            </Label>
+                                            <Input
+                                                id="teamName"
+                                                value={teamFormData.teamName}
+                                                onChange={(e) => setTeamFormData(prev => ({ ...prev, teamName: e.target.value }))
+                                                }
+                                                placeholder="ชื่อทีมของคุณ"
+                                                className="mt-1"
+                                                required
+                                            />
+                                        </div>
+
+                                        {/* Team Type */}
+                                        <div>
+                                            <Label className="text-sm font-medium">เทมเพลตทีม</Label>
+                                            <div className="mt-2 flex items-center gap-2">
+                                                <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                    <Settings className="w-3 h-3 mr-1" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Invite People */}
+                                        <div>
+                                            <Label className="text-sm font-medium">
+                                                เชิญสมาชิก
+                                            </Label>
+                                            <div className="mt-2 flex gap-2">
+                                                <Input
+                                                    value={emailInput}
+                                                    onChange={(e) => setEmailInput(e.target.value)}
+                                                    placeholder="อีเมลหรือชื่อผู้ใช้"
+                                                    className="flex-1"
+                                                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addEmail())}
+                                                />
+                                                <Button type="button" onClick={addEmail} size="sm">
+                                                    เพิ่ม
+                                                </Button>
+                                            </div>
+                                            
+                                            {/* Email Tags */}
+                                            {teamFormData.inviteEmails.length > 0 && (
+                                                <div className="mt-2 flex flex-wrap gap-1 max-h-20 overflow-y-auto">
+                                                    {teamFormData.inviteEmails.map((email) => (
+                                                        <div key={email} className="inline-flex items-center px-2 py-1 rounded text-xs bg-gray-100 border">
+                                                            {email}
+                                                            <Button
+                                                                type="button"
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                className="ml-1 h-auto p-0 w-3 h-3"
+                                                                onClick={() => removeEmail(email)}
+                                                            >
+                                                                <X className="w-2 h-2" />
+                                                            </Button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Submit Buttons */}
+                                        <div className="flex justify-end gap-2 pt-2 border-t">
+                                            <Button type="button" variant="outline" size="sm" onClick={() => setStep("create")}>
+                                                ยกเลิก
+                                            </Button>
+                                            <Button type="submit" size="sm" className="bg-blue-600 hover:bg-blue-700">
+                                                สร้าง
+                                            </Button>
+                                        </div>
+                                    </form>
                                 </div>
                             )}
                         </PopoverContent>
