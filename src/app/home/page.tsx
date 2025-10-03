@@ -18,7 +18,7 @@ export default function Home() {
 
     return (
         <div className="max-w-full overflow-hidden"> {/* ป้องกัน overflow */}
-            <div className="relative bg-yellow-200 m-4 h-[128px] p-4 rounded-[20px]">
+            <div className="relative bg-yellow-200 m-4 h-[128px] p-4 rounded-[20px] bg-[url('/next.svg')] bg-right bg-no-repeat">
                 <div className="text-[16px] text-orange-600">สวัสดีวันจันทร์</div>
                 <MainButton classname="absolute right-0 bottom-0 m-4" label="กิจกรรมของฉัน" />
             </div>
